@@ -26,7 +26,7 @@ func CreateNacosClient(namespaceId string, logDir, cacheDir string) (*NacosClien
 		{
 			IpAddr:      "122.51.59.109",
 			ContextPath: "/nacos",
-			Port:        8848,
+			Port:        30655,
 			Scheme:      "http",
 		},
 	}
