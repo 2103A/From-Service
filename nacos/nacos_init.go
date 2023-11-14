@@ -1,17 +1,17 @@
 package nacos
 
 import (
-	"github.com/nacos-group/nacos-sdk-go/v2/clients"
-	"github.com/nacos-group/nacos-sdk-go/v2/clients/config_client"
-	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
-	"github.com/nacos-group/nacos-sdk-go/v2/vo"
+	"github.com/nacos-group/nacos-sdk-go/clients"
+	"github.com/nacos-group/nacos-sdk-go/clients/config_client"
+	"github.com/nacos-group/nacos-sdk-go/common/constant"
+	"github.com/nacos-group/nacos-sdk-go/vo"
 )
 
-type NacosClient struct {
-	Client config_client.IConfigClient
+type NacosConfig struct {
+	NacosClient config_client.IConfigClient
 }
 
-func CreateNacosClient(namespaceId string, logDir, cacheDir string) (*NacosClient, error) {
+func CreateNacosClient(namespaceId string, logDir, cacheDir string) *NacosConfig {
 
 	clientConfig := constant.ClientConfig{
 		NamespaceId:         namespaceId,
@@ -24,7 +24,7 @@ func CreateNacosClient(namespaceId string, logDir, cacheDir string) (*NacosClien
 
 	serviceConfigs := []constant.ServerConfig{
 		{
-			IpAddr:      "122.51.59.109",
+			IpAddr:      "118.89.85.75",
 			ContextPath: "/nacos",
 			Port:        30655,
 			Scheme:      "http",
@@ -37,15 +37,24 @@ func CreateNacosClient(namespaceId string, logDir, cacheDir string) (*NacosClien
 			ServerConfigs: serviceConfigs,
 		},
 	)
+	if err != nil {
+		panic("get nacos client false" + err.Error())
+		return nil
+	}
 
-	return &NacosClient{
-		Client: client,
-	}, err
+	return &NacosConfig{
+		NacosClient: client,
+	}
+
 }
 
-func (c *NacosClient) GetConfig(dataId, group string) (string, error) {
-	return c.Client.GetConfig(vo.ConfigParam{
+func (n *NacosConfig) GetConfigInfo(dataId, group string) (string, error) {
+	content, err := n.NacosClient.GetConfig(vo.ConfigParam{
 		DataId: dataId,
 		Group:  group,
 	})
+	if err != nil {
+		return "", err
+	}
+	return content, nil
 }
