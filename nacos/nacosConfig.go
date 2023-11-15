@@ -7,6 +7,11 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/vo"
 )
 
+const (
+	nacosName = "118.89.85.75"
+	nacosPort = 30655
+)
+
 type NacosConfig struct {
 	NacosClient config_client.IConfigClient
 }
@@ -24,9 +29,9 @@ func CreateNacosClient(namespaceId string, logDir, cacheDir string) *NacosConfig
 
 	serviceConfigs := []constant.ServerConfig{
 		{
-			IpAddr:      "118.89.85.75",
+			IpAddr:      nacosName,
 			ContextPath: "/nacos",
-			Port:        30655,
+			Port:        nacosPort,
 			Scheme:      "http",
 		},
 	}
