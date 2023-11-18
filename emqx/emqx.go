@@ -18,15 +18,13 @@ func GetEmqxConfig(clientID string) (mqtt.Client, error) {
 	opts.SetClientID(clientID)
 	opts.SetUsername(userName)
 	opts.SetPassword(passWord)
-	//opts.SetDefaultPublishHandler(messagePubHandler)
 
 	client := mqtt.NewClient(opts)
+
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		fmt.Println(token.Error())
 		return nil, token.Error()
 	}
-
-	//client.Disconnect(250)
 
 	return client, nil
 }
