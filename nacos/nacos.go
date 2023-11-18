@@ -11,8 +11,7 @@ const (
 	nacosPort = 30655
 )
 
-func CreateNacosClient(namespaceId string, dataId, group string) (string, error) {
-
+func GetNacosConfig(namespaceId string, dataId, group string) (string, error) {
 	clientConfig := constant.ClientConfig{
 		NamespaceId:         namespaceId,
 		TimeoutMs:           5000,
