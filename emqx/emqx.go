@@ -12,7 +12,7 @@ const (
 	passWord = "admin111"
 )
 
-func GetEmqxConfig(clientID string) (*mqtt.Client, error) {
+func GetEmqxConfig(clientID string) (mqtt.Client, error) {
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker(fmt.Sprintf("tcp://%s:%d", emqxHost, emqxPort))
 	opts.SetClientID(clientID)
@@ -28,5 +28,5 @@ func GetEmqxConfig(clientID string) (*mqtt.Client, error) {
 
 	//client.Disconnect(250)
 
-	return &client, nil
+	return client, nil
 }
