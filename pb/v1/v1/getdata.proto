@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package getdata.v1;
+option go_package="generate/api/getdata/v1;v1";
+option java_multiple_files = true;
+
+
+option java_package = "dev.kratos.api.helloworld.v1";
+option java_outer_classname = "HelloworldProtoV1";
+service Get{
+  rpc GetData(GetDataRequest)returns(GetDataReply){
+  }
+}
+message GetDataRequest{
+  string DeviceName=1;
+}
+message GetDataReply{
+  string DeviceName=1;
+}
